@@ -1,0 +1,34 @@
+.current-data-info {
+  margin-bottom: 25px;
+}
+
+.icon-today {
+  font-size: 86px;
+}
+
+.today-temp {
+  -webkit-transform: translateY(25%);
+  -ms-transform: translateY(25%);
+  transform: translateY(25%);
+}
+
+.line-change-values {
+  border-left: 3px solid #35495e;
+  height: 100%;
+}
+
+.btn-change-values {
+  position: absolute;
+  bottom: -15px;
+  left: 20px;
+}
+
+.weather-more-info {
+  margin: 0px auto;
+  float: none;
+  display: table;
+}
+
+.weather-more-info-text {
+  margin: 2px 0px;
+}
