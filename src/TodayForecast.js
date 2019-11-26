@@ -1,6 +1,6 @@
 import React from "react";
 import WeatherIcon from "./WeatherIcon";
-import "./TodayForecast.css";
+import "./TodayForecast.scss";
 
 export default function TodayForecast(props) {
   return (

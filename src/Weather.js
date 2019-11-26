@@ -14,7 +14,7 @@ import CurrentLocation from "./CurrentLocation";
 import TodayForecast from "./TodayForecast";
 import Forecast from "./Forecast";
 
-import "./Weather.css";
+import "./Weather.scss";
 
 Weather.propTypes = {
   city: PropTypes.string.isRequired
