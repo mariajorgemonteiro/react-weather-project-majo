@@ -1,0 +1,25 @@
+.menu-icons {
+    font-size: 42px;
+    color: rgb(0, 136, 102);
+    text-shadow: darkgrey 1px 1px;
+    margin-top: 11px;
+  }
+  
+  .menu-icons:hover {
+    color: #ff7e67;
+    text-shadow: darkgrey 1px 1px;
+  }
+  
+  .search-option {
+    flex-flow: inherit;
+    padding: 8px 15px;
+  }
+  
+  .dropdown-menu-search {
+    width: 330px;
+    top: 10px !important;
+  }
+  .btn {
+    margin: 0px 0px 0px 5px;
+  }
+  

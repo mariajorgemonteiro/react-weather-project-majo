@@ -1,0 +1,42 @@
+.next-days-forecast {
+    margin-bottom: 35px;
+  }
+  
+  .forecast-data {
+    border-radius: 30px;
+    border: 2px solid #e0e0ec;
+    background-image: linear-gradient(
+      to top,
+      lightgrey 0%,
+      lightgrey 1%,
+      rgb(224, 224, 224) 26%,
+      rgb(239, 239, 239) 48%,
+      rgb(217, 217, 217) 75%,
+      rgb(188, 188, 188) 100%
+    );
+    box-shadow: 6px 6px 2px 1px rgba(34, 138, 94, 0.3);
+  }
+  
+  .forecast-box {
+    text-align: center;
+  }
+  
+  .next-days {
+    font-size: 20px;
+  }
+  
+  .icon-forecast {
+    font-size: 34px;
+  }
+  
+  .max-forecast {
+    font-size: 18px;
+    margin-top: 14px;
+    margin-bottom: 1px;
+  }
+  
+  .min-forecast {
+    font-size: 14px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
