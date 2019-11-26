@@ -5,7 +5,7 @@ import Api from "./Api";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 
-import "./Forecast.css";
+import "./Forecast.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 Forecast.propTypes = {
