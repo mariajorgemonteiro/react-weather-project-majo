@@ -1,82 +1,74 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import Api from "./Api";
+import WeatherIcon from "./WeatherIcon";
 
+import Row from "react-bootstrap/Row";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 
-import "./Forecast.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "./Forecast.css";
 
-Forecast.propTypes = {
-  city: PropTypes.string.isRequired
-};
-const axios = require('axios');
+const axios = require("axios");
 
 export default function Forecast(props) {
-  const [data, setData] = useState([]);
+  const [loaded, setLoaded] = useState(false);
+  const [data, setData] = useState(null);
 
-  function getWeekDay(date) {
-    let weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    let day = date.getDay();
-    return weekdays[day];
-  }
-
-  function friendlyDate(date){
-   return date.getDate() +`/` + (date.getMonth() + 1);  
+  function formatTime(date) {
+    let hour = date.getHours();
+    if (hour < 10) {
+      hour = `0${hour}`;
+    }
+    let minutes = date.getMinutes();
+    if (minutes < 10) {
+      minutes = `0${minutes}`;
+    }
+    return `${hour}:${minutes}`;
   }
 
   // eslint-disable-next-line
   function refreshForecast(city) {
-    console.log(`${Api.url}/forecast?q=${city}&appid=${Api.key}&units=metric`);
     axios
       .get(`${Api.url}/forecast?q=${city}&appid=${Api.key}&units=metric`)
       .then(function(response) {
-        let forecast = response.data.list;
-        let dailyForecast = [7, 15, 23, 31, 39].map(index => {
-          return {
-            day: friendlyDate(new Date(forecast[index].dt * 1000)),
-            weekday: getWeekDay(new Date(forecast[index].dt * 1000)),
-            icon: forecast[index].weather[0].icon,
-            temperature: Math.round(forecast[index].main.temp),
-            max: Math.round(forecast[index].main.temp_max),
-            min: Math.round(forecast[index].main.temp_min)
-          };
-        });
-        setData({ dailyForecast });
-        console.log(data);
+        console.log(response);
+        setData(response.data);
+        setLoaded(true);
       });
   }
 
-  if (data) {
+  if (loaded && data.city.name === props.city) {
     return (
-      <Col sm>
-        <Card className="forecast-data">
-          <Card.Body className="forecast-box">
-            <Card.Title className="next-days">
-              {" "}
-              {data.weekday} <br /> {data.day}{" "}
-            </Card.Title>
-            <Card.Text className="text-center">
-              <span className="icon-forecast">
-                <FontAwesomeIcon icon={data.icon} />
-                ­<br />
-              </span>
-              <span className="max-forecast">
-                <span> {data.max} </span>
-                <span>ºC</span>
-                <br />
-              </span>
-              <span className="min-forecast">
-                <span> {data.min} </span>
-                <span>ºC</span>
-              </span>
-            </Card.Text>
-          </Card.Body>
-        </Card>
-      </Col>
+      <Row className="clearfix justify-content-around next-days-forecast">
+        {data.list.slice(0, 5).map(function(weather) {
+          return (
+            <Col sm key={weather.dt_txt}>
+              <Card className="forecast-data">
+                <Card.Body className="forecast-box">
+                  <Card.Title className="next-days">
+                    {formatTime(new Date(weather.dt * 1000))}
+                  </Card.Title>
+                  <Card.Text className="text-center">
+                    <span className="icon-forecast">
+                      <WeatherIcon icon={weather.weather[0].icon} size={50} /> ­<br />
+                    </span>
+                    <span className="max-forecast">
+                      <span> <sub>max </sub>{Math.round(weather.main.temp_max)} </span>
+                      <br />
+                    </span>
+                    <span className="min-forecast">
+                      <span> <sub>min </sub>{Math.round(weather.main.temp_min)}  </span>
+                    </span>
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
+          );
+        })}
+      </Row>
     );
   } else {
-    return <div />;
+    refreshForecast(props.city);
+    return null;
   }
 }

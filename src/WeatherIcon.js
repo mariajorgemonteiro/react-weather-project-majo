@@ -3,7 +3,10 @@ import PropTypes from "prop-types";
 import ReactAnimatedWeather from "react-animated-weather";
 
 WeatherIcon.propTypes = {
-  icon: PropTypes.string.isRequired
+  icon: PropTypes.string.isRequired,
+  animate: PropTypes.bool,
+  size: PropTypes.number,
+  color: PropTypes.string
 };
 
 export default function WeatherIcon(props) {
@@ -31,9 +34,9 @@ export default function WeatherIcon(props) {
   return (
     <ReactAnimatedWeather
       icon={iconMap[props.icon]}
-      color="grey"
-      size={90}
       animate={true}
+      color="grey"
+      size={props.size}
     />
   );
 }

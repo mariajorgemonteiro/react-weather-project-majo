@@ -4,33 +4,26 @@ import Dropdown from "react-bootstrap/Dropdown";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 
-import "./Search.scss";
+import "./Search.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 library.add(fas);
 
-class CustomToggle extends React.Component {
-  constructor(props, context) {
-    super(props, context);
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick(e) {
-    e.preventDefault();
-    this.props.onClick(e);
-  }
-
-  render() {
-    return (
-      <span href="#" onClick={this.handleClick}>
-        {this.props.children}
-      </span>
-    );
-  }
-}
 
 export default function Search(props) {
+  const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
+    <span
+    href=""
+    ref={ref}
+    onClick={e => {
+      e.preventDefault();
+      onClick(e);
+    }}
+  >
+    {children}
+    </span>
+    ));
   const [value, setValue] = useState(null);
 
   function handleSubmit(event) {
